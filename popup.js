@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 reader.onload = function (e) {
                     imageUrl = e.target.result;
-                    pasteZone.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="max-width: 100%; max-height: 80px;">`;
+                    pasteZone.innerHTML = `<img src="${imageUrl}" alt="Product Image">`;
                 };
                 
                 reader.readAsDataURL(blob);
@@ -39,20 +39,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function generatePDF(product, brand, imageSrc) {
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+        const doc = new jsPDF({
+            orientation: "portrait",
+            unit: "px",
+            format: [250, 400] // Adjusted to fit content
+        });
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(16);
-        doc.text("Product Information", 15, 20);
+        doc.text("Product Information", 20, 30);
 
         doc.setFontSize(12);
-        doc.text(`Product Name: ${product}`, 15, 40);
-        doc.text(`Brand: ${brand}`, 15, 50);
+        doc.text(`Product Name: ${product}`, 20, 60);
+        doc.text(`Brand: ${brand}`, 20, 80);
 
         let img = new Image();
         img.src = imageSrc;
         img.onload = function () {
-            doc.addImage(img, "JPEG", 15, 60, 100, 100);
+            doc.addImage(img, "JPEG", 20, 100, 210, 210); // Adjusted size to fit properly
             doc.save("product-info.pdf");
         };
     }
