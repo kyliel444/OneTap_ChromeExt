@@ -3,7 +3,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const saveBtn = document.getElementById("save-btn");
     let imageUrl = "";
 
-    // Prevent default behavior for drag-and-drop
+    // Enable drag-and-drop from webpage
+    document.addEventListener("dragover", (event) => {
+        event.preventDefault();
+    });
+
     dropZone.addEventListener("dragover", (event) => {
         event.preventDefault();
         dropZone.style.borderColor = "#28a745";
@@ -13,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         dropZone.style.borderColor = "#007bff";
     });
 
-    // Handle dropped image
     dropZone.addEventListener("drop", (event) => {
         event.preventDefault();
         dropZone.style.borderColor = "#007bff";
@@ -30,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Save data as PDF
     saveBtn.addEventListener("click", () => {
         const productName = document.getElementById("product-name").value;
         const brandName = document.getElementById("brand-name").value;
