@@ -4,12 +4,17 @@
     "version": "1.0",
     "description": "Drag and drop an image from the webpage and save product details as a PDF.",
     "permissions": ["activeTab", "downloads"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    },
+    "host_permissions": ["*://*/*"],
     "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png"
-      }
+      "default_title": "Open OneTap"
     }
-  }  
+  }
+  
