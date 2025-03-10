@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const saveBtn = document.getElementById("save-btn");
     let imageUrl = "";
 
-    // Enable drag-and-drop from webpage
+    // Prevent default behavior for drag-and-drop
     document.addEventListener("dragover", (event) => {
         event.preventDefault();
     });
@@ -27,9 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let reader = new FileReader();
             reader.onload = function (e) {
                 imageUrl = e.target.result;
-                dropZone.innerHTML = `<img src="${imageUrl}" alt="Product Image">`;
+                dropZone.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="max-width: 100%; max-height: 80px;">`;
             };
             reader.readAsDataURL(imageFile);
+        } else {
+            alert("Please drop a valid image file.");
         }
     });
 
@@ -47,21 +49,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function generatePDF(product, brand, imageSrc) {
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(16);
-        doc.text("Product Information", 15, 20);
-
-        doc.setFontSize(12);
-        doc.text(`Product Name: ${product}`, 15, 40);
-        doc.text(`Brand: ${brand}`, 15, 50);
-
-        let img = new Image();
-        img.src = imageSrc;
-        img.onload = function () {
-            doc.addImage(img, "JPEG", 15, 60, 100, 100);
-            doc.save("product-info.pdf");
-        };
-    }
-});
+        const doc
