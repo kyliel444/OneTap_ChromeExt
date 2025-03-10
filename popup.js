@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 reader.onload = function (e) {
                     imageUrl = e.target.result;
-                    pasteZone.innerHTML = `<img src="${imageUrl}" alt="Product Image">`;
+                    pasteZone.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover;">`;
                 };
                 
                 reader.readAsDataURL(blob);
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function generatePDF(product, brand, imageSrc) {
+        // ✅ Correct way to initialize jsPDF
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({
             orientation: "portrait",
