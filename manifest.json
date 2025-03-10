@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "OneTap",
+    "version": "1.0",
+    "description": "Drag and drop an image from the webpage and save product details as a PDF.",
+    "permissions": ["activeTab", "downloads"],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+      }
+    }
+  }  
